@@ -7,6 +7,8 @@ use Phalcon\Mvc\Application;
 use Phalcon\Url;
 use Phalcon\Db\Adapter\Pdo\Mysql;
 use Phalcon\Config;
+use token\Token;
+use data\Data;
 
 $config = new Config([]);
 
@@ -24,6 +26,20 @@ $loader->registerDirs(
     ]
 );
 
+$loader->registerNamespaces(
+    [
+       'token' => APP_PATH . '/component/',
+       'artist' => APP_PATH.'/component/',
+       'data' => APP_PATH . '/component/',
+    ]
+);
+$loader->registerClasses(
+    [
+        'token' => APP_PATH . '/componnet/Token.php',
+        
+    ]
+);
+
 $loader->register();
 
 $container = new FactoryDefault();
@@ -34,6 +50,18 @@ $container->set(
         $view = new View();
         $view->setViewsDir(APP_PATH . '/views/');
         return $view;
+    }
+);
+$container->set(
+    'token',
+    function () {
+        return new Token();
+    }
+);
+$container->set(
+    'data',
+    function () {
+        return new Data();
     }
 );
 
@@ -58,7 +86,7 @@ $container->set(
                 'host'     => 'mysql-server',
                 'username' => 'root',
                 'password' => 'secret',
-                'dbname'   => 'phalt',
+                'dbname'   => 'spotify',
                 ]
             );
         }

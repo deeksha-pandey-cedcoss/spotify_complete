@@ -1,41 +1,53 @@
 <?php
 
 use Phalcon\Mvc\Controller;
-// defalut controller view
+
 class IndexController extends Controller
 {
     public function indexAction()
     {
-
-        $url = "https://www.hindustantimes.com/feeds/rss/astrology/rssfeed.xml";
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_URL, $url);
-
-        $d = curl_exec($ch);
-        $xml = simplexml_load_string($d);
-
-        $this->view->xmldata = $xml;
-
-        $json = json_encode($xml);
-        $array = json_decode($json, true);
-        $this->view->xmlarray = $array;
-
-        curl_close($ch);
-
-        $u = "http://api.open-notify.org/iss-now.json";
-
-        $ch = curl_init();
-
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_URL, $u);
-
-        $result = json_decode(curl_exec($ch), true);
-        curl_close($ch);
-
-        $this->view->data = $result;
-
-        $this->view->d = $result['iss_position'];
+        // default action
     }
+    public function searchAction()
+    {
+        session_start();
+        $serach_name = $_POST['search1'];
+
+        $serach_param = [];
+
+        if (isset($_POST)) {
+            if (isset($_POST['artist'])) {
+                array_push($serach_param, $_POST['artist']);
+            }
+            if (isset($_POST['playlist'])) {
+                array_push($serach_param, $_POST['playlist']);
+            }
+            if (isset($_POST['episode'])) {
+                array_push($serach_param, $_POST['episode']);
+            }
+            if (isset($_POST['album'])) {
+                array_push($serach_param, $_POST['album']);
+            }
+            if (isset($_POST['show'])) {
+                array_push($serach_param, $_POST['show']);
+            }
+            if (isset($_POST['track'])) {
+                array_push($serach_param, $_POST['track']);
+            }
+        }
+        $new = str_replace(" ", "%20", $serach_name);
+        $type = implode("%2C", $serach_param);
+        $token = $this->token->Gettoken();
+        $_SESSION['token']=$token;
+        // print_r($token);die;
+
+        $data= $this->data->Getdata($new, $type);
+
+        
+        
+
+        $this->view->d=$data;
+  
+    }
+   
 }

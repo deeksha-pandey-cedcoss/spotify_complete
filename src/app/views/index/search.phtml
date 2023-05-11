@@ -1,0 +1,32 @@
+<?php
+// echo "<pre>";
+// print_r($d);
+// die;
+?>
+<div class="text-center">
+    <?php
+    foreach ($d as $key => $value) {
+        echo "<h1><b><u>$key:<u></b></h1><br>";
+        echo "<div class='row m-2 p-2'>";
+        foreach ($value['items'] as $vkey => $dvalue) {
+            echo "<br> <div class='col-lg-3 col-md-6 mb-4 p-3 card bg-secondary text-black ' style='width: 18rem;'>
+                    <img class='card-img-top' src='";
+            echo $dvalue['images'][0]['url'];
+            echo "' alt='Image'>
+                    <div class='card-body '>
+                    <div class='card-header'><h5 class='card-title'><b>$dvalue[name]</b></h5></div>
+                    <div class='bg-dark text-black ><ul class='bg-dark text-black list-group list-group-flush '>
+                    <li class='list-group-item text-black '><b>Release Date :$dvalue[release_date]</b></li>
+    <li class='list-group-item text-black '><b>Type:episode</b></li>
+    <li class='list-group-item'><b>Singer:$dvalue[name]</b></li>
+  </ul></div><br>";
+  echo $this->tag->linkTO(["add/add/?type=".$key."&&singer=".$dvalue['name']."&&id=".$dvalue['id'],"ADD","class"=>"btn btn-info"]);
+                    echo " <a href='#' class='btn btn-info'>ADD</a>
+                    </div>";
+            echo "</div>";
+        }
+        echo "<br>";
+    }
+    echo "</div>";
+    ?>
+</div>
