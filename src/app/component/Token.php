@@ -30,7 +30,6 @@ class Token extends Injectable
 
         $result = json_decode(curl_exec($ch), true);
         
-
         return $result['access_token'];
         
         curl_close($ch);

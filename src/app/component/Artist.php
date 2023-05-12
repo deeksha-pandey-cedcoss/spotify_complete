@@ -12,11 +12,7 @@ class Artist extends Injectable
         session_start();
         $ch = curl_init();
         $token =$_SESSION['token'];
-        // print_r($id);die;
-        // 
         $url = "https://api.spotify.com/v1/artists/$id";
-        
-
         $header = [
             'Authorization: Bearer ' . $token
         ];
@@ -24,10 +20,8 @@ class Artist extends Injectable
         curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $result = json_decode(curl_exec($ch), true);
-        
         print_r($result);
         return $result;
-       
         curl_close($ch);
     }
 }

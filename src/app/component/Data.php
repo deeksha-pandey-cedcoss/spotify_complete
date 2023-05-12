@@ -15,13 +15,10 @@ class Data extends Injectable
         $header = [
             'Authorization: Bearer ' . $token
         ];
-
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $result = json_decode(curl_exec($ch), true);
-
-
         return $result;
         curl_close($ch);
     }

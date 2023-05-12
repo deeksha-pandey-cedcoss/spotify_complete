@@ -1,6 +1,9 @@
+
 <div class="text-center">
     <?php
-    echo $this->tag->linkTO(["add/display", "Playlist", "class" => "btn btn-info m-3"]);
+    
+     echo $this->tag->linkTO(["display/index","Search","class"=>"btn btn-info m-3"]);
+    echo $this->tag->linkTO(["add/display","Playlist","class"=>"btn btn-info m-3"]);
     foreach ($d as $key => $value) {
         echo "<h1><b><u>$key:<u></b></h1><br>";
         echo "<div class='row m-2 p-2'>";
@@ -16,12 +19,10 @@
     <li class='list-group-item text-black '><b>Type:episode</b></li>
     <li class='list-group-item'><b>Singer:$dvalue[name]</b></li>
   </ul></div><br>";
-            echo $this->tag->linkTO([
-                "add/add/?type=" . $key . "&&singer=" . $dvalue['name'] . "&&id=" . $dvalue['id'],
-                "ADD",
-                "class" => "btn btn-info"
-            ]);
-            echo "</div>";
+    echo $this->tag->linkTO(["add/add/?type=".$key."&&singer=".
+    $dvalue['name']."&&id=".$dvalue['id'],
+    "ADD","class"=>"btn btn-info"]);
+                    echo "</div>";
             echo "</div>";
         }
         echo "<br>";

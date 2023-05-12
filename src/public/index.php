@@ -28,15 +28,16 @@ $loader->registerDirs(
 
 $loader->registerNamespaces(
     [
-       'token' => APP_PATH . '/component/',
-       'artist' => APP_PATH.'/component/',
-       'data' => APP_PATH . '/component/',
+        'token' => APP_PATH . '/component/',
+        'artist' => APP_PATH . '/component/',
+        'data' => APP_PATH . '/component/',
+        'recommend' => APP_PATH . '/component/',
     ]
 );
 $loader->registerClasses(
     [
         'token' => APP_PATH . '/componnet/Token.php',
-        
+
     ]
 );
 
@@ -87,9 +88,9 @@ $container->set(
                 'username' => 'root',
                 'password' => 'secret',
                 'dbname'   => 'spotify',
-                ]
-            );
-        }
+            ]
+        );
+    }
 );
 
 $container->set(

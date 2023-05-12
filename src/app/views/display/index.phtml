@@ -1,0 +1,92 @@
+<?php
+
+echo $this->tag->linkTO(["login/index","Logout","class"=>"btn btn-info m-3"]);
+echo $this->tag->linkTO(["add/display","Playlist","class"=>"btn btn-info m-3"]);
+?>
+<body class="bg-dark text-white">
+    <div class="bg-dark text-white">
+        <form method="POST" action="/display/search">
+            <div class="input-group rounded  bg-secondary">
+                <input type="search" class="form-control rounded m-5"
+                 name="search1" placeholder="Search" aria-label="Search"
+                  aria-describedby="search-addon" />
+            </div>
+            <div class="row">
+                <div class="form-check m-5">
+                    <input class="form-check-input" name="artist" type="checkbox" value="artist" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Artist
+                    </label>
+
+                </div>
+                <div class="form-check m-5 ">
+                    <input class="form-check-input " name="playlist"
+                     type="checkbox" value="playlist" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Playlist
+                    </label>
+
+                </div>
+                <div class="form-check m-5">
+                    <input class="form-check-input" name="episode"
+                     type="checkbox" value="episode" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Episode
+                    </label>
+
+                </div>
+                <div class="form-check m-5">
+                    <input class="form-check-input" name="album" type="checkbox" value="album" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Album
+                    </label>
+
+                </div>
+                <div class="form-check m-5">
+                    <input class="form-check-input" name="show" type="checkbox" value="show" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Show
+                    </label>
+
+                </div>
+                <div class="form-check m-5 ">
+                    <input class="form-check-input" name="track" type="checkbox" value="track" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Track
+                    </label>
+
+                </div>
+            </div>
+            <center><button type="submit" class="align-center"><i class="fas fa-search m-1">
+            </i>Search<button></center>
+        </form>
+    </div>
+    <div class="text-center">
+        <?php
+
+        foreach ($data as $key => $value) {
+            echo "<div class='row m-2 p-2'>";
+            foreach ($value as $vkey => $vvalue) {
+                if ($img == "") {
+                    $img = "https://i.scdn.co/image/ab6761610000e5eb92103a69abd9fbf76d866374";
+                } else {
+                    $img = $vvalue['album']['images'][0]['url'];
+                }
+                $view .= "<div class='card col-3 p-3 border  border-5 border-white bg-secondary text-light mb-1'
+             style='width: 18rem;height:330px;border-radius:10px; '>
+    <img class='card-img-top' src=' " . $img . " ' alt='Card image cap' height=180px>
+    <div class='card-body'>
+      <h4 class='card-title'>" . $vvalue['album']['artists'][0]['name'] . "</h4>";
+    $view .=$this->tag->linkTO(["add/add/?type=".$key."&&singer=".
+    $vvalue['album']['artists'][0]['name'] . "&&id=" . $vvalue['id'],
+     "ADD", "class" => "btn btn-info"]);
+                $view .=  "
+    </div>
+  </div>";
+            }
+            $view .= "</div>";
+        }
+        echo $view;
+        ?>
+    </div>
+</body>

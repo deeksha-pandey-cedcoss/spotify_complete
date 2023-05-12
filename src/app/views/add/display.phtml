@@ -1,4 +1,12 @@
+<body class="bg-dark">
 <?php
 
-// echo "<pre>";
+echo $this->tag->linkTO(["display/index","Search","class"=>"btn btn-info m-3"]);
+echo $this->tag->linkTO(["add/display","Playlist","class"=>"btn btn-info m-3"]);
+echo "<<h1 class='text-center text-white'><u>MY FAVOURITES</u></H1>";
+echo "<div class='row m-2 p-2'>";
 echo $view;
+echo "</div>";
+
+?>
+</body>
