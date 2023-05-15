@@ -19,7 +19,7 @@ class Data extends Injectable
         curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $result = json_decode(curl_exec($ch), true);
-        return $result;
         curl_close($ch);
+        return $result;
     }
 }

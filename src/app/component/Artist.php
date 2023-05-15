@@ -21,7 +21,7 @@ class Artist extends Injectable
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $result = json_decode(curl_exec($ch), true);
         print_r($result);
-        return $result;
         curl_close($ch);
+        return $result;
     }
 }
